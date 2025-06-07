@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Antoinette & Etienne's Wedding</title>
+  <style>
+    body {
+      font-family: 'Playfair Display', serif;
+      background-color: #faf5f0;
+      color: #555;
+      margin: 0;
+      padding: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-image: radial-gradient(#f3e7e9 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
+
+    .card {
+      max-width: 500px;
+      width: 100%;
+      background: white;
+      padding: 25px 20px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      border-radius: 10px;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+      border: 1px solid #f0e6e6;
+      z-index: 1;
+      margin: 10px;
+    }
+
+    .card::before, .card::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #f3e7e9 0%, #d4af37 50%, #f3e7e9 100%);
+    }
+
+    .card::before {
+      top: 0;
+    }
+
+    .card::after {
+      bottom: 0;
+    }
+
+    .corner {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%23d4af37" d="M100,0 L100,40 C60,40 60,60 40,60 L0,60 L0,0 Z"/></svg>');
+      background-size: contain;
+      opacity: 0.7;
+    }
+
+    .corner-tl { top: 0; left: 0; transform: rotate(0deg); }
+    .corner-tr { top: 0; right: 0; transform: rotate(90deg); }
+    .corner-bl { bottom: 0; left: 0; transform: rotate(270deg); }
+    .corner-br { bottom: 0; right: 0; transform: rotate(180deg); }
+
+    h1 {
+      font-size: 26px;
+      color: #5a3e36;
+      margin: 10px 0 15px;
+      font-weight: 500;
+    }
+
+    h1::before, h1::after {
+      content: "❀";
+      color: #d4af37;
+      margin: 0 8px;
+      font-size: 18px;
+    }
+
+    .rings-container {
+      perspective: 1000px;
+      margin: 15px auto;
+      height: 80px;
+    }
+
+    .rings-3d {
+      position: relative;
+      width: 160px;
+      height: 100px;
+      margin: 0 auto;
+      transform-style: preserve-3d;
+      animation: rotate 15s infinite linear;
+    }
+
+    .ring {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: 7px solid #d4af37;
+      box-shadow: 
+        0 0 10px rgba(212, 175, 55, 0.6),
+        inset 0 0 8px rgba(212, 175, 55, 0.6);
+      background: linear-gradient(135deg, #f9f295 0%, #d4af37 50%, #f9f295 100%);
+    }
+
+    .ring-1 { transform: rotateY(30deg) translateZ(0); left: 30px; }
+    .ring-2 { transform: rotateY(-30deg) translateZ(0); left: 80px; }
+
+    @keyframes rotate {
+      0% { transform: rotateY(0deg); }
+      100% { transform: rotateY(360deg); }
+    }
+
+    .names {
+      font-size: 20px;
+      margin: 15px 0;
+      padding: 10px 0;
+      color: #5a3e36;
+      position: relative;
+    }
+
+    .names::before, .names::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 150px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #d4af37, transparent);
+    }
+
+    .names::before { top: 0; }
+    .names::after { bottom: 0; }
+
+    .and {
+      font-size: 22px;
+      margin: 0 8px;
+      color: #d4af37;
+    }
+
+    .date {
+      font-size: 18px;
+      color: #7a6a5f;
+      margin: 15px 0;
+    }
+    
+    .countdown-container {
+      margin: 20px 0;
+      padding: 15px;
+      background-color: #fffaf5;
+      border-radius: 8px;
+      border: 1px solid #f0e6e6;
+    }
+    
+    .countdown-title {
+      font-size: 16px;
+      margin-bottom: 10px;
+      color: #7a6a5f;
+    }
+    
+    .countdown {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+    
+    .countdown-item {
+      min-width: 60px;
+    }
+    
+    .countdown-number {
+      font-size: 24px;
+      color: #d4af37;
+      padding: 8px 12px;
+      border-radius: 5px;
+      background: white;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    
+    .countdown-label {
+      font-size: 11px;
+      margin-top: 5px;
+      color: #7a6a5f;
+      text-transform: uppercase;
+    }
+    
+    @media (max-width: 500px) {
+      .card { padding: 20px 15px; }
+      h1 { font-size: 22px; }
+      .names { font-size: 18px; }
+      .and { font-size: 20px; }
+      .date { font-size: 16px; }
+      .countdown { gap: 5px; }
+      .countdown-item { min-width: 50px; }
+      .countdown-number { font-size: 20px; padding: 6px 10px; }
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="card">
+  <div class="corner corner-tl"></div>
+  <div class="corner corner-tr"></div>
+  <div class="corner corner-bl"></div>
+  <div class="corner corner-br"></div>
+
+  <h1>Wedding Celebration</h1>
+
+  <div class="rings-container">
+    <div class="rings-3d">
+      <div class="ring ring-1"></div>
+      <div class="ring ring-2"></div>
+    </div>
+  </div>
+
+  <div class="names">
+    <strong>Antoinette</strong> <span class="and">&</span> <strong>Etienne</strong>
+  </div>
+
+  <div class="date">August 9, 2025</div>
+  
+  <div class="countdown-container">
+    <div class="countdown-title">Time until our wedding:</div>
+    <div class="countdown" id="countdown">
+      <div class="countdown-item">
+        <div class="countdown-number" id="days">00</div>
+        <div class="countdown-label">Days</div>
+      </div>
+      <div class="countdown-item">
+        <div class="countdown-number" id="hours">00</div>
+        <div class="countdown-label">Hours</div>
+      </div>
+      <div class="countdown-item">
+        <div class="countdown-number" id="minutes">00</div>
+        <div class="countdown-label">Minutes</div>
+      </div>
+      <div class="countdown-item">
+        <div class="countdown-number" id="seconds">00</div>
+        <div class="countdown-label">Seconds</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const rings3d = document.querySelector('.rings-3d');
+    
+    rings3d.addEventListener('mouseenter', () => rings3d.style.animationPlayState = 'paused');
+    rings3d.addEventListener('mouseleave', () => rings3d.style.animationPlayState = 'running');
+    
+    document.addEventListener('mousemove', function(e) {
+      const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+      rings3d.style.transform = `rotateY(${xAxis}deg) rotateX(0deg)`;
+    });
+    
+    function updateCountdown() {
+      const weddingDate = new Date('2025-08-09T00:00:00');
+      const diff = weddingDate - new Date();
+      
+      document.getElementById('days').textContent = Math.floor(diff / 86400000).toString().padStart(2, '0');
+      document.getElementById('hours').textContent = Math.floor((diff % 86400000) / 3600000).toString().padStart(2, '0');
+      document.getElementById('minutes').textContent = Math.floor((diff % 3600000) / 60000).toString().padStart(2, '0');
+      document.getElementById('seconds').textContent = Math.floor((diff % 60000) / 1000).toString().padStart(2, '0');
+    }
+    
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  });
+</script>
+
+</body>
+</html>
